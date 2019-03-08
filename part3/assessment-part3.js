@@ -13,7 +13,13 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
-
+function callBinding(magicAnimals, updateAnimal, id) {
+    for (let i = 0; i < magicAnimals.length; i++) {
+        if (magicAnimals[i] === id) {
+            updateAnimal(magicAnimals[i])
+        }
+    }
+}
 
 
 // *************

@@ -43,7 +43,13 @@ function noWeakLink() {
     method: 'GET',
     url: '/api/users'
   })
-  // CODE HERE...
+    .then(response => {
+      firstUser = response.data[0]
+      return response
+    }).then(response2 => {
+      thirdUser = response2.data[2]
+      return response2.data[9]
+    })
 
 }
 
@@ -69,11 +75,13 @@ function noWeakLink() {
 var elephant = {
   name: 'Horton'
 }
+
 function large() {
 
   return 'My name is ' + this.name + ' and I am very heavy!'
 }
 // CODE HERE...
+let boundToElephant = large.bind(elephant)
 
 
 
@@ -88,6 +96,18 @@ function large() {
 // and return the bound function.
 
 // CODE HERE...
+function deathStar(capacity, crew) {
+  capacity = function () {
+    this.crew
+    return this.crew
+  }
+  crew = {
+    members: 100
+  }
+
+  let capacity = capacity.bind(crew)
+  return capacity
+}
 
 
 
@@ -103,6 +123,13 @@ function large() {
 // The closure function will return the combined value of assets and liabilities.
 
 // CODE HERE...
+
+function accountingOffice(assets) {
+
+  return function (liabilities) {
+    return assets += liabilities
+  }
+}
 
 
 
@@ -128,7 +155,13 @@ function large() {
 // };
 
 // CODE HERE...
-
+function forgetter(name) {
+  return function rememberall(item) {
+    let items = []
+    items.push(item)
+    return { name: name, remember: item }
+  }
+}
 
 
 // *************
@@ -156,3 +189,26 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+function frodo(startingHungerValue, startingDangerValue) {
+  let hunger = startingHungerValue
+  let danger = startingDangerValue
+
+  return {
+    dinnerOverFire: function () {
+      hunger -= 25
+      danger += 40
+      if (hunger || danger > 100 || hunger || danger < 0) {
+        return null
+      } else { return { hunger: hunger, danger: danger } }
+    },
+    hidingInBush: function () {
+      hunger += 35
+      danger -= 20
+      if (hunger || danger > 100 || hunger || danger < 0) {
+        return null
+      }
+      { return { hunger: hunger, danger: danger } }
+    }
+  }
+
+}
